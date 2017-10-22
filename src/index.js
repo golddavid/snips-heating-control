@@ -28,6 +28,8 @@ mqtt_client.on("connect", function () {
 });
 
 mqtt_client.on("message", function (topic, message) {
+    console.log("Received a message for topic: " + topic);
+    
     if (topic === topicName) {
         const slots = parseSlots(message.toString());
 
