@@ -29,7 +29,7 @@ mqtt_client.on("connect", function () {
 
 mqtt_client.on("message", function (topic, message) {
     console.log("Received a message for topic: " + topic);
-    
+
     if (topic === topicName) {
         const slots = parseSlots(message.toString());
 
@@ -64,13 +64,19 @@ mqtt_client.on("message", function (topic, message) {
 
                 //the whole response has been recieved, so we just print it out here
                 response.on('end', function () {
-                    console.log(str);
+                    console.log("On end of resonse: " + str);
                 });
             }
 
-            https.get(options, callback).end();
+            const request = https.get(options, callback);
 
-            say(`Setting thetemperature to ${temperature} in the ${room}`);
+            request.on('error', function (err) {
+                console.log("On error of request: " + err);
+            });
+
+            request.end();
+
+            say(`Setting the temperature to ${temperature} in the ${room}`);
         }
     }
 });
