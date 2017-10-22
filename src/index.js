@@ -1,22 +1,7 @@
 const mqtt = require("mqtt");
-const https = require("https");
+const http = require("http");
 const globalLog = require("global-request-logger");
 const mqtt_client = mqtt.connect("mqtt://localhost:9898");
-
-const args = process.argv;
-
-if (args[2] !== "-u") {
-    console.log("Missing FHEM user -u parameter");
-    process.exit(1);
-}
-
-if (args[4] !== "-p") {
-    console.log("Missing FHEM password -p parameter");
-    process.exit(1);
-}
-
-const fhemUser = args[3];
-const fhemPwd = args[5];
 
 const topicName = "hermes/intent/user_MomG26m3034__HeatingControl";
 
@@ -64,9 +49,7 @@ mqtt_client.on("message", function (topic, message) {
             const options = {
                 host: '127.0.0.1',
                 port: '8088',
-                auth: fhemUser + ':' + fhemPwd,
-                path: '/fhem?cmd=set%20' + fhemEntity + '%20desired-temp%2010',
-                method: 'GET'
+                path: '/fhem?cmd=set%20' + fhemEntity + '%20desired-temp%2012&XHR=1'
             };
 
             callback = function(response) {
@@ -83,7 +66,7 @@ mqtt_client.on("message", function (topic, message) {
                 });
             };
 
-            const request = https.request(options, callback);
+            const request = http.get(options, callback);
 
             request.on('error', function (err) {
                 console.log("On error of request: " + err);
