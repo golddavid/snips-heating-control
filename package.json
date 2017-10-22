@@ -1,17 +1,19 @@
 {
-  "name": "snips-iot-assistant-sample",
+  "name": "snips-heating-control",
   "version": "1.0.0",
-  "description": "A sample assistant for Snips, the voice assistant platform",
-  "main": "index.js",
+  "description": "A sample assistant made with Snips, the voice assistant platform, to control heating via FHEM",
+  "engines": {
+    "node": "^6.11.1",
+    "npm": ">=3.10.0"
+  },
+  "main": "./src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snipsco/snips-platform-lambda-samples.git"
+    "url": "git+https://github.com/golddavid/snips-heating-control.git"
   },
-  "license": "MIT",
-  "keywords": [],
-  "author": "",
-  "homepage": "https://snips.ai",
+  "license": "UNLICENSED",
+  "author": "David Gold",
   "dependencies": {
-    "mqtt": "2.8.2"
+    "mqtt": "2.13.0"
   }
 }

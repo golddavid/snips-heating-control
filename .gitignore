@@ -1,2 +1,5 @@
 /node_modules
 git_accesstoken.txt
+/.idea/
+/snips-heating-control.iml
+/package-lock.json
