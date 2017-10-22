@@ -3,8 +3,6 @@ const https = require("https");
 const globalLog = require("global-request-logger");
 const mqtt_client = mqtt.connect("mqtt://localhost:9898");
 
-globalLog.initialize();
-
 const args = process.argv;
 
 if (args[2] !== "-u") {
@@ -21,6 +19,20 @@ const fhemUser = args[3];
 const fhemPwd = args[5];
 
 const topicName = "hermes/intent/user_MomG26m3034__HeatingControl";
+
+globalLog.initialize();
+
+globalLog.on('success', function(request, response) {
+    console.log('SUCCESS');
+    console.log('Request', request);
+    console.log('Response', response);
+});
+
+globalLog.on('error', function(request, response) {
+    console.log('ERROR');
+    console.log('Request', request);
+    console.log('Response', response);
+});
 
 // Subscribe to the important messages
 mqtt_client.on("connect", function () {
