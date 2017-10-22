@@ -48,7 +48,7 @@ mqtt_client.on("message", function (topic, message) {
             }
 
             const options = {
-                host: `https://127.0.0.1`,
+                host: `127.0.0.1`,
                 port: "8088",
                 auth: `${fhemUser}:${fhemPwd}`,
                 path: `/fhem?cmd=set%20${fhemEntity}%20desired-temp%2010`
