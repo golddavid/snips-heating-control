@@ -1,8 +1,6 @@
 const mqtt = require("mqtt");
 const https = require("https");
 
-const {fetch} = fetchPonyfill();
-
 const mqtt_client = mqtt.connect("mqtt://localhost:9898");
 
 const fhemUser = "";
@@ -93,5 +91,5 @@ function parseSlots(message) {
 
 function say(text) {
     console.log(text);
-    //mqtt_client.publish("hermes/tts/say", JSON.stringify({"text": text}));
+    mqtt_client.publish("hermes/tts/say", JSON.stringify({"text": text}));
 }
