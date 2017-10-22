@@ -62,10 +62,11 @@ mqtt_client.on("message", function (topic, message) {
             }
 
             const options = {
-                host: `127.0.0.1`,
-                port: "8088",
-                auth: `${fhemUser}:${fhemPwd}`,
-                path: `/fhem?cmd=set%20${fhemEntity}%20desired-temp%2010`
+                host: '127.0.0.1',
+                port: '8088',
+                auth: fhemUser + ':' + fhemPwd,
+                path: '/fhem?cmd=set%20' + fhemEntity + '%20desired-temp%2010',
+                method: 'GET'
             };
 
             callback = function(response) {
@@ -80,9 +81,9 @@ mqtt_client.on("message", function (topic, message) {
                 response.on('end', function () {
                     console.log("On end of resonse: " + str);
                 });
-            }
+            };
 
-            const request = https.get(options, callback);
+            const request = https.request(options, callback);
 
             request.on('error', function (err) {
                 console.log("On error of request: " + err);
