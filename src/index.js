@@ -1,7 +1,9 @@
 const mqtt = require("mqtt");
 const https = require("https");
-
+const globalLog = require("global-request-logger");
 const mqtt_client = mqtt.connect("mqtt://localhost:9898");
+
+globalLog.initialize();
 
 const args = process.argv;
 
