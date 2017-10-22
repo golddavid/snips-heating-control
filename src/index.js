@@ -3,11 +3,22 @@ const https = require("https");
 
 const mqtt_client = mqtt.connect("mqtt://localhost:9898");
 
-const fhemUser = "";
-const fhemPwd = "";
+const args = process.argv;
+
+if (args[2] !== "-u") {
+    console.log("Missing FHEM user -u parameter");
+    process.exit(1);
+}
+
+if (args[4] !== "-p") {
+    console.log("Missing FHEM password -p parameter");
+    process.exit(1);
+}
+
+const fhemUser = args[3];
+const fhemPwd = args[5];
 
 const topicName = "hermes/intent/user_MomG26m3034__HeatingControl";
-
 
 // Subscribe to the important messages
 mqtt_client.on("connect", function () {
